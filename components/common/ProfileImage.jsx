@@ -4,7 +4,7 @@ import React from 'react'
 import icons from "../../assets/portrait.png"
 const ProfileImage = () => {
   return (
-    <View style={styles.container} >
+    <View style={styles.container} className="bg-white h-full" >
     <Image source={icons} className="object-contain" style={styles.image} />
   </View>
   )
