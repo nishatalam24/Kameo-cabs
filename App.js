@@ -30,6 +30,8 @@ import rootReducer from './reducer/index';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { setNavTruthy } from "./slice/navSlice";
 import Backicon from "./icons/Backicon";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 const Drawer = createDrawerNavigator();
 
  function AppNavigator() {
@@ -104,28 +106,27 @@ const Drawer = createDrawerNavigator();
 
   const [displayhid, setDisplayhid] = useState("flex");
 
+  const Tab = createBottomTabNavigator();
+
+  function TabNavigator() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={SearchCabs} />
+        <Tab.Screen name="Settings" component={ProfileImage} />
+      </Tab.Navigator>
+    );
+  }
   
 
   return (
     // <SafeAreaProvider className="bg-[#b02f2f]">
  <SafeAreaProvider > 
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }} className="">
    
 
 
   
         <NavigationContainer >
-
-        {/* {navTruthy ? ( */}
-        {/* <TouchableOpacity
-          className="  z-[10] p-[10px] border   "
-          onPress={() => handlePress3()}
-        >
-          <Backicon />
-        </TouchableOpacity> */}
-      {/* ) : (
-        ""
-      )} */}
 
           <Drawer.Navigator
             initialRouteName="Home"
@@ -133,33 +134,31 @@ const Drawer = createDrawerNavigator();
               header: () => (
                 <Animated.View
                 style={[{ bottom: bottomPosition }, { display: displayhid }]}
-
-                  // className="border"
-                  // className="absolute bottom-[100px]"
-                  className="bg-red-600"
                 >
-                  <View className="flex   flex-row items-center px-[10px] h-[60px] absolute border-b bg-white">
-                    {/* Toggle button */}
+                  <View className="flex   flex-row items-center px-[10px] h-[60px] absolute  bg-white " style={styles.navbar}>
                     <TouchableOpacity onPress={() => navigation.toggleDrawer()}  >
                       <Ionicons name="menu" size={27} color="black" />
                     </TouchableOpacity>
 
                     <View className="flex flex-row justify-between items-center w-[90vw] px-[10px]">
-                      {/* Logo in the center */}
 
                       <Logo />
 
-                      {/* Profile image on the right */}
                       <TouchableOpacity
                         onPress={() => alert("Profile clicked")}
                       >
                         <ProfileImage
                           width={40}
                           height={40}
-                          style={{ borderRadius: 20 }} // Make it round if it's not already
+                          style={{ borderRadius: 20 }} 
                         />
                       </TouchableOpacity>
+
+
+
                     </View>
+
+
                   </View>
                 </Animated.View>
               ),
@@ -171,10 +170,7 @@ const Drawer = createDrawerNavigator();
             })}
             
           >
-              {/* <Animated.View
-                  style={[styles.textContainer, { bottom: bottomPosition }]}
-                > */}
-
+      
 
             <Drawer.Screen
               name="Sign in / Sign Up"
@@ -184,7 +180,6 @@ const Drawer = createDrawerNavigator();
                   <Auth customStyle={"left-[10px]"} />
                 ),
               }}
-              
             />
 
             <Drawer.Screen
@@ -238,11 +233,19 @@ const Drawer = createDrawerNavigator();
               }}
             />
 
+<Drawer.Screen
+              name="Tabs"
+              component={TabNavigator}
+              options={{
+                drawerIcon: ({ color, size }) => <Ionicons name="home" size={27} color={color} />,
+              }}
+            />
 
               {/* </Animated.View> */}
           </Drawer.Navigator>
 
-
+    
+    
         
         </NavigationContainer>
 {/* 
@@ -268,6 +271,20 @@ const styles = StyleSheet.create({
   //   padding: 20,
   //   borderRadius: 5,
   // },
+  navbar: {
+    height: 60, // Example height
+    backgroundColor: '#fff', // Background color of the navbar
+    justifyContent: 'center',
+    alignItems: 'center',
+    // Shadow for iOS
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 }, // Offset x: 0, y: 2
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 3, // Shadow blur radius
+    // Elevation for Android
+    elevation: 5,
+  },
+
   text: {
     fontSize: 16,
     color: "#333",

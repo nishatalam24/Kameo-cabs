@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Animated,
-  Button,
   FlatList,
   TextInput,
   ScrollView,
+  Image,
+  Button
 } from "react-native";
 import CommonBtn from "../common/CommonBtn";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -19,8 +20,25 @@ import Caricon from "../../icons/Caricon";
 import Backicon from "../../icons/Backicon";
 import LocationIcon from "../../icons/LocationIcon";
 import CalenderPicker from "../common/CalenderPicker";
+import LineIcon from "../../icons/LineIcon";
+import PersonIcon from "../../icons/PersonIcon";
+import HomepageList from "../common/HomepageList";
+import HomepageHelpcent from "../common/HomepageHelpcent";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native'
+
+
+
 
 const SearchCabs = () => {
+
+  useEffect(() => {
+    console.log("triptype has been updated to:", triptype);
+    // Perform any other actions based on the updated triptype here
+  });
+
+  const navigation = useNavigation();
   // const [isEnabled, setIsEnabled] = useState(false);
   // const animatedValue = new Animated.Value(isEnabled ? 1 : 0);
   const [triptype, setTriptype] = useState(true);
@@ -88,7 +106,7 @@ const SearchCabs = () => {
       dispatch(setNavTruthy(false));
       console.log(navTruthy);
       Animated.timing(bottomPosition, {
-        toValue: -100, // Target bottom position (100px)
+        toValue: 10, // Target bottom position (100px)
         duration: 300, // Duration of the transition in ms
         useNativeDriver: false,
       }).start();
@@ -101,7 +119,7 @@ const SearchCabs = () => {
     } else {
       dispatch(setNavTruthy(true));
       Animated.timing(bottomPosition, {
-        toValue: 100, // Target bottom position (100px)
+        toValue: 120, // Target bottom position (100px)
         duration: 200, // Duration of the transition in ms
         useNativeDriver: false,
       }).start();
@@ -117,156 +135,276 @@ const SearchCabs = () => {
     // console.log(navTruthy);
   }
 
-  const bottomPosition = useRef(new Animated.Value(0)).current; // Initial bottom position
+  const bottomPosition = useRef(new Animated.Value(10)).current; // Initial bottom position
   const paddingPosition = useRef(new Animated.Value(0)).current;
   // Animated.timing(bottomPosition, {
   //   toValue: 100, // Target bottom position (100px)
   //   duration: 100, // Duration of the transition in ms
   //   useNativeDriver: false,
   // }).start();
-
+  console.log(bottomPosition);
   return (
-
-    <ScrollView>
-
-    <View
-      style={{ padding: 20 }}
-      className="bg-  flex-col items-center  bg-white gap-[10px] top-[50px]"
-    >
-
-
-      {navTruthy ? (
-        <TouchableOpacity
-          className=" z-[10]  top-[-20%]  right-[40%]  "
-          onPress={() => handlepress()}
+    // <Stack.Navigator initialRouteName="ChildScreen1" >
+    <View className="bg-white  ">
+      <ScrollView className="">
+        <View
+          style={{ padding: 20 }}
+          className="bg-  flex-col items-center  bg-white gap-y-[15px] top-[10px] pt-[80px]"
         >
-          <Backicon />
-        </TouchableOpacity>
-      ) : (
-        ""
-      )}
-
-      <View>
-        <View className="flex flex-row gap-[10px] ">
-          <View>
-            {triptype ? (
-              <CommonBtn
-                customStyle={"bg-black "}
-                childcustomStyle={"font-bold text-[14px]"}
-                text={"Search Cab"}
-              />
+          <View className="z-[10] absolute  top-[1.5vh]  right-[102%] ">
+            {navTruthy ? (
+              <TouchableOpacity className="  " onPress={() => handlepress()}>
+                <Backicon />
+              </TouchableOpacity>
             ) : (
-              <CommonBtn
-                customStyle={"bg-[#F6F6F6] text-black "}
-                childcustomStyle={"font-bold text-[14px] text-black"}
-                text={"Search Cab"}
-                onPress={() => setTriptype(true)}
-              />
+              ""
             )}
           </View>
 
-          <View>
-            {triptype ? (
-              <CommonBtn
-                customStyle={"bg-[#F6F6F6] text-black "}
-                childcustomStyle={"font-bold text-[14px] text-black"}
-                text={"Full Cab"}
-                onPress={() => setTriptype(false)}
-              />
-            ) : (
-              <CommonBtn
-                customStyle={"bg-black  "}
-                childcustomStyle={"font-bold text-[14px] "}
-                text={"Full Cab"}
-              />
-            )}
+          <View className=" z-[10] top-[0vh]  absolute h-[1000px]">
+            {navTruthy ? (
+              triptype ? (
+                <Text className="text-[25px] font-bold">Share Cab</Text>
+              ) : (
+                <Text className="text-[25px] font-bold">Full Cab</Text>
+              )
+            ) : null}
           </View>
-        </View>
-      </View>
 
-
-
-        <View>
-       
-      <Animated.View
-            // style={{ bottom: bottomPosition }}
-         
-          >
-<View    className="bg-white      w-screen   px-[5%]  flex flex-col ">
-
-
-            <View className="flex flex-col top-[10%]   ">
           <View>
-            <Text className="left-[12%]  top-[15%] text-[#949494]">
-              From (Area, Street or Landmark)
-            </Text>
-            <View className="flex flex-row items-center gap-[5px]">
-              <View className="right-[10%]">
-                <Caricon />
+            <View className="flex flex-row gap-[10px] ">
+              <View>
+                {triptype ? (
+                  <CommonBtn
+                    customStyle={"bg-black "}
+                    childcustomStyle={"font-bold text-[14px]"}
+                    text={"share Cab"}
+                  />
+                ) : (
+                  <CommonBtn
+                    customStyle={"bg-[#F6F6F6] text-black "}
+                    childcustomStyle={"font-bold text-[14px] text-black"}
+                    text={"Share Cab"}
+                    onPress={() => setTriptype(true)}
+                  />
+                )}
               </View>
-
-              <TextInput
-                placeholder="Search location"
-                value={query}
-                onChangeText={handleSearch}
-                style={{
-                  borderColor: "gray",
-                  borderBottomWidth: 1,
-                  padding: 15,
-                  borderRadius: 5,
-                  marginBottom: 10,
-                }}
-                onPress={() => handlepress()}
-                className="w-[80%] border-[#E3E3E3]"
-              />
-
-              <SwitchLocatebtn />
-            </View>
-          </View>
-
-          <View>
-            <Text className="left-[12%]  top-[15%] text-[#949494]">
-              From (Area, Street or Landmark)
-            </Text>
-            <View className="flex flex-row items-center">
-              <View className="right-[10%]">
-                <Caricon />
-              </View>
-
-              <TextInput
-                placeholder="Search location"
-                value={query}
-                onChangeText={handleSearch}
-                style={{
-                  borderColor: "gray",
-                  borderBottomWidth: 1,
-                  padding: 15,
-                  borderRadius: 5,
-                  marginBottom: 10,
-                }}
-                onPress={() => handlepress()}
-                className="w-[90%] border-[#E3E3E3]"
-              />
-            </View>
-          </View>
-
   
+              <View>
+                {triptype ? (
+                  <CommonBtn
+                    customStyle={"bg-[#F6F6F6] text-black "}
+                    childcustomStyle={"font-bold text-[14px] text-black"}
+                    text={"Full Cab"}
+                    onPress={() => setTriptype(false)}
+                  />
+                ) : (
+                  <CommonBtn
+                    customStyle={"bg-black  "}
+                    childcustomStyle={"font-bold text-[14px] "}
+                    text={"Full Cab"}
+                  />
+                )}
+              </View>
+            </View>
+          </View>
+
+          <View>
+            <Animated.View style={{ bottom: bottomPosition }}>
+              <View className="bg-white w-screen   px-[5%]  flex flex-col ">
+                <View className="flex flex-col top-[10%]   ">
+                  <View>
+                    <Text className="left-[12%]  top-[15%] text-[#949494]">
+                      From (Area, Street or Landmark)
+                    </Text>
+                    <View className="flex flex-row items-center gap-[5px]">
+                      <View className="right-[10%]">
+                        <Caricon />
+                      </View>
+
+                      <TextInput
+                        placeholder="Search location"
+                        value={query}
+                        onChangeText={handleSearch}
+                        style={{
+                          // borderColor: "gray",
+                          // borderBottomWidth: 1,
+                          padding: 15,
+                          // borderRadius: 5,
+                          marginBottom: 10,
+                        }}
+                        onPress={() => handlepress()}
+                        className="w-[80%] border-b border-[#E3E3E3]"
+                      />
+
+                      <SwitchLocatebtn />
+                    </View>
+                  </View>
+
+                  <View>
+                    <Text className="left-[12%]  top-[15%] text-[#949494]">
+                      From (Area, Street or Landmark)
+                    </Text>
+                    <View className="flex flex-row items-center">
+                      <View className="right-[10%]">
+                        <Caricon />
+                      </View>
+
+                      <TextInput
+                        placeholder="Search location"
+                        value={query}
+                        onChangeText={handleSearch}
+                        style={{
+                          // borderColor: "gray",
+                          borderBottomWidth: 1,
+                          padding: 15,
+                          // borderRadius: 5,
+                          marginBottom: 10,
+                        }}
+                        onPress={() => handlepress()}
+                        className="w-[90%] border-b border-[#E3E3E3]"
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </Animated.View>
+          </View>
+
+          <View className="mt-[100px] items-center flex-row  w-screen justify-around  px-[20px]">
+            <View className="flex flex-row items-center   justify-between w-[45%]">
+              <CalenderPicker />
+              <View>
+                <Text className="font-[400]">Date of journey</Text>
+                <Text className="font-[800] text-[16px]">Fri, 12 Jan</Text>
+              </View>
+            </View>
+
+            <LineIcon />
+
+            <View className="flex flex-row w-[10%]   justify-between">
+              <PersonIcon />
+              <Text className="text-[16px] font-[16px]">1</Text>
+            </View>
+          </View>
+
+
+          <View className="py-[20px]  z-[10]">
+
+            {/* {
+navTruthy?(
+            <CommonBtn
+              customStyle={"bg-black text-black border h-[56px] w-[304px]"}
+              childcustomStyle={"font-bold text-[14px]  border text-white"}
+              text={"Done"}
+              // onPress={() => setTriptype(true)}
+            />):
+            (
+              <CommonBtn
+              customStyle={"bg-black text-black border h-[56px] w-[304px]"}
+              childcustomStyle={"font-bold text-[14px]  border text-white"}
+              text={"Search"}
+              // onPress={() => setTriptype(true)}
+            />
+            )
+
+          } */}
+ <Button
+        title="Go to Child Screen 2"
+        onPress={() => navigation.navigate('ChildScreen2')}
+      />
+
+
+
+          </View>
+
+
+   
+
+          <View className="bg-[#F6F6F6] w-screen    ">
+            <View className="w-[90%]">
+              <View className="py-[10px] px-[10px]">
+                <Text className="font-[800] text-[16px]  leading-[21.82px]">
+                  Cab Offers
+                </Text>
+              </View>
+
+              <View className=" items-center flex flex-row justify-center  w-screen">
+                <View className="flex flex-row justify-between items-center bg-[#326BFF] rounded-[16px] h-[153px] w-[90%]  ">
+                  {/* left */}
+
+                  <View className="pl-[20px] flex-col justify-between gap-y-[40px]">
+                    <Text className="text-white font-[700] text-[16px]">
+                      Start 2024 with{"\n"}Kameo Intercity
+                    </Text>
+                    <Text className="font-[400] text-[12px] text-white">
+                      Explore more
+                    </Text>
+                  </View>
+
+                  {/* right */}
+                  <View className=" ">
+                    <Image
+                      source={require("../../assets/manDriving.jpeg")}
+                      // style={{ width: 200, height: 200 }}
+                      className="h-[153px] w-[152px]  rounded-[16px]"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            <View className="py-[40px]">
+              <HomepageList />
+            </View>
+
+
+            {/* <View className="w-screen px-[10px]"> */}
+
+<Text className="font-[700] py-[10px] text-[26px] text-[#262628] px-[20px]">
+Carpool Help Centre
+</Text>
+
+<View>
+  <HomepageHelpcent/>
+</View>
+
+
+{/* </View> */}
+
+            <View
+            
+            
+            ></View>
+
+
+
+
+          </View>
+
+
+<View>
+<CommonBtn
+                    customStyle={"bg-[#262628] text-white w-[248px]"}
+                    childcustomStyle={"font-bold text-[14px] text-white  "}
+                    text={"Read our Help Centre"}
+                    onPress={() => setTriptype(true)}
+                  />
+</View>
+
         </View>
 
+    
+      </ScrollView>
 
-</View>
-          </Animated.View>
-
-
-
-
-     {navTruthy ? (
-          <View className="pl-[%] ">
+      <View className="absolute top-[29vh] pl-[5%]">
+        {navTruthy ? (
+          <View>
             <FlatList
               data={filteredData}
               keyExtractor={(item) => item}
               renderItem={({ item }) => (
-                <View className="flex flex-row items-center gap-x-[1%]">
+                <View className="flex flex-row items-center justify-center gap-x-[1%]">
                   <LocationIcon />
                   <TouchableOpacity
                     onPress={() => handleLocationClick(item)}
@@ -279,11 +417,11 @@ const SearchCabs = () => {
                   >
                     <Text
                       style={{
-                        padding: 4,
-                        borderBottomColor: "black",
-                        borderBottomWidth: 1,
+                        padding: 10,
+                        // borderBottomColor: "black",
+                        // borderBottomWidth: 1,
                       }}
-                      className="border-2 "
+                      className=" "
                     >
                       {item}
                     </Text>
@@ -295,17 +433,10 @@ const SearchCabs = () => {
           </View>
         ) : (
           ""
-        )} 
+        )}
       </View>
-{/* 
-      <View className="mt-[100px] top- border h-[100px]">
-        <CalenderPicker />
-        <Text>Hellow</Text>
-      </View> */}
-
     </View>
-    </ScrollView>
-
+    // </Stack.Navigator>
   );
 };
 

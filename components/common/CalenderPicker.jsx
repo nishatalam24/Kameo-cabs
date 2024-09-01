@@ -28,24 +28,30 @@ const CalenderPicker = () => {
       )}
 
 <View>
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
         className=""
+    
+
       >
         <View style={styles.modalContainer}>
           <View style={styles.calendarContainer}>
             <CalendarPicker onDateChange={onDateChange} />
             <Button title="Close" onPress={() => setModalVisible(false)} />
+
+
           </View>
         </View>
+
       </Modal>
 
 
       </View>
-
+   
     </View>
   );
 };
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   calendarContainer: {
     backgroundColor: 'white',
