@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef ,useEffect,useState} from "react";
 import {
   View,
   Text,
@@ -151,7 +151,7 @@ const SearchCabs = () => {
           style={{ padding: 20 }}
           className="bg-  flex-col items-center  bg-white gap-y-[15px] top-[10px] pt-[80px]"
         >
-          <View className="z-[10] absolute  top-[1.5vh]  right-[102%] ">
+          <View className="z-[10] absolute  top-[1.5vh]  right-[100%] ">
             {navTruthy ? (
               <TouchableOpacity className="  " onPress={() => handlepress()}>
                 <Backicon />
@@ -291,28 +291,31 @@ const SearchCabs = () => {
 
           <View className="py-[20px]  z-[10]">
 
-            {/* {
+            {
 navTruthy?(
             <CommonBtn
               customStyle={"bg-black text-black border h-[56px] w-[304px]"}
-              childcustomStyle={"font-bold text-[14px]  border text-white"}
+              childcustomStyle={"font-bold text-[14px]   text-white"}
               text={"Done"}
               // onPress={() => setTriptype(true)}
+              onPress={() => handlepress()}
+              
             />):
             (
               <CommonBtn
               customStyle={"bg-black text-black border h-[56px] w-[304px]"}
-              childcustomStyle={"font-bold text-[14px]  border text-white"}
+              childcustomStyle={"font-bold text-[14px]   text-white"}
               text={"Search"}
               // onPress={() => setTriptype(true)}
+              onPress={() => navigation.navigate('Available')}
             />
             )
 
-          } */}
- <Button
+          }
+ {/* <Button
         title="Go to Child Screen 2"
-        onPress={() => navigation.navigate('ChildScreen2')}
-      />
+        onPress={() => navigation.navigate('Available')}
+      /> */}
 
 
 

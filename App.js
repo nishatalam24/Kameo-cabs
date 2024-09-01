@@ -31,7 +31,11 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { setNavTruthy } from "./slice/navSlice";
 import Backicon from "./icons/Backicon";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Drawer_Nav from "./components/core/Drawer_Nav";
+import { createStackNavigator } from '@react-navigation/stack'
+import NavigationDrawer from "./components/NavigationDrawer/NavigationDrawer";
 
+import Tes2 from './components/core/Tes2'
 const Drawer = createDrawerNavigator();
 
  function AppNavigator() {
@@ -108,18 +112,17 @@ const Drawer = createDrawerNavigator();
 
   const Tab = createBottomTabNavigator();
 
-  function TabNavigator() {
-    return (
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={SearchCabs} />
-        <Tab.Screen name="Settings" component={ProfileImage} />
-      </Tab.Navigator>
-    );
-  }
+  // function TabNavigator() {
+  //   return (
+  //     <Tab.Navigator>
+  //       <Tab.Screen name="Home" component={SearchCabs} />
+  //       <Tab.Screen name="Settings" component={ProfileImage} />
+  //     </Tab.Navigator>
+  //   );
+  // }
   
-
+  const Stack = createStackNavigator();
   return (
-    // <SafeAreaProvider className="bg-[#b02f2f]">
  <SafeAreaProvider > 
       <SafeAreaView style={{ flex: 1 }} className="">
    
@@ -128,7 +131,7 @@ const Drawer = createDrawerNavigator();
   
         <NavigationContainer >
 
-          <Drawer.Navigator
+          {/* <Drawer.Navigator
             initialRouteName="Home"
             screenOptions={({ navigation }) => ({
               header: () => (
@@ -163,15 +166,23 @@ const Drawer = createDrawerNavigator();
                 </Animated.View>
               ),
               drawerStyle: {
-                backgroundColor: "#f0f0f0", // Background color of the drawer
+                backgroundColor: "#f0f0f0", 
               },
-              drawerActiveTintColor: "gray", // Color of the active item text
-              drawerInactiveTintColor: "black", // Color of the inactive item text
+              drawerActiveTintColor: "gray", 
+              drawerInactiveTintColor: "black", 
             })}
             
           >
       
-
+      <Drawer.Screen
+              name="Home"
+              component={SearchCabs}
+              options={{
+                drawerIcon: ({ color, size }) => {
+                  return <Search customStyle={"left-[10px]"} />;
+                },
+              }}
+            />
             <Drawer.Screen
               name="Sign in / Sign Up"
               component={Auth}
@@ -182,15 +193,7 @@ const Drawer = createDrawerNavigator();
               }}
             />
 
-            <Drawer.Screen
-              name="Search Cabs"
-              component={SearchCabs}
-              options={{
-                drawerIcon: ({ color, size }) => {
-                  return <Search customStyle={"left-[10px]"} />;
-                },
-              }}
-            />
+     
 
 
             <Drawer.Screen
@@ -239,18 +242,35 @@ const Drawer = createDrawerNavigator();
               options={{
                 drawerIcon: ({ color, size }) => <Ionicons name="home" size={27} color={color} />,
               }}
-            />
+            /> 
 
-              {/* </Animated.View> */}
-          </Drawer.Navigator>
+          </Drawer.Navigator> */}
 
+
+{/* <Drawer_Nav/> */}
+
+<Stack.Navigator initialRouteName="Home">
+
+<Stack.Screen 
+          name="Home" 
+          component={NavigationDrawer} 
+          options={{ headerShown: false }} 
+        />
+
+ 
+    <Stack.Screen 
+          name="Available" 
+          component={Tes2} 
+          options={{ headerShown: false }} 
+        />
     
+
+      </Stack.Navigator>
     
+
         
         </NavigationContainer>
-{/* 
-        <Button title="Move Text" onPress={handlePress} />
-        <Button title="Move Text 2" onPress={handlePress2} /> */}
+
 
       </SafeAreaView>
     </SafeAreaProvider>
