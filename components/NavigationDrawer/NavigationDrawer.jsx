@@ -16,6 +16,8 @@ import Logo from "../../icons/Logo";
 import ProfileImage from "../common/ProfileImage";
 import Search from "../../icons/Search";
 import { Provider, useDispatch, useSelector } from 'react-redux';
+import Bottombar from "../common/Bottombar";
+import CabScheduleList from "../core/CabScheduleList";
 const NavigationDrawer = () => {
     const bottomPosition = useRef(new Animated.Value(0)).current;
     const Drawer = createDrawerNavigator();
@@ -70,7 +72,7 @@ const NavigationDrawer = () => {
 
   return (
     <Drawer.Navigator
-    initialRouteName="SearchCabs"
+    initialRouteName="BottomBa"
     screenOptions={({ navigation }) => ({
       header: () => (
         <Animated.View
@@ -112,15 +114,19 @@ const NavigationDrawer = () => {
     
   >
 
+
+
 <Drawer.Screen
-      name="SearchCabs"
-      component={SearchCabs}
-      options={{
-        drawerIcon: ({ color, size }) => {
-          return <Search customStyle={"left-[10px]"} />;
-        },
-      }}
-    />
+  name="BottomBar"
+  component={Bottombar}
+  options={{
+    drawerIcon: ({ color, size }) => {
+      return <Search customStyle={"left-[10px]"} />;
+    },
+    drawerLabel: () => null, // This hides the label from the drawer list
+    drawerItemStyle: { display: 'none' }, // This hides the item entirely
+  }}
+/>
 
 
   </Drawer.Navigator>

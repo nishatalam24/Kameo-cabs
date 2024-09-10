@@ -27,6 +27,7 @@ import HomepageHelpcent from "../common/HomepageHelpcent";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native'
+// import Bottombar from "../common/Bottombar";
 
 
 
@@ -307,7 +308,7 @@ navTruthy?(
               childcustomStyle={"font-bold text-[14px]   text-white"}
               text={"Search"}
               // onPress={() => setTriptype(true)}
-              onPress={() => navigation.navigate('Available')}
+              onPress={() => navigation.navigate('CabScheduleList')}
             />
             )
 
@@ -438,6 +439,7 @@ Carpool Help Centre
           ""
         )}
       </View>
+
     </View>
     // </Stack.Navigator>
   );

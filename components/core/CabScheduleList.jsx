@@ -3,8 +3,17 @@ import React, { useEffect } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import TImingCablist from "../common/TImingCablist";
 import AvailableCabList from "../common/AvailableCabList";
+import { useNavigation } from '@react-navigation/native';
+// import Bottombar from "../common/Bottombar";
 
-const Tes2 = ({ navigation }) => {
+
+
+
+const CabScheduleList = () => {
+
+
+  const navigation = useNavigation();
+
   useEffect(() => {
     console.log("i am at ");
   });
@@ -68,7 +77,6 @@ const Tes2 = ({ navigation }) => {
 
 
 
-
     </View>
 
 
@@ -76,4 +84,4 @@ const Tes2 = ({ navigation }) => {
   );
 };
 
-export default Tes2;
+export default CabScheduleList;

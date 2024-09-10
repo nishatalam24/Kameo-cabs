@@ -19,12 +19,12 @@ import ProfileImage from "./components/common/ProfileImage";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Auth from "./icons/Auth";
 import Search from "./icons/Search";
-import OffersCompo from "./components/core/OffersCompo";
+// import OffersCompo from "./components/core/OffersCompo";
 import Helps from "./icons/Helps";
 import Offers from "./icons/Offers";
 import Aboutus from "./icons/Aboutus";
 import Settings from "./icons/Settings";
-import SearchCabs from "./components/core/SearchCabs";
+// import SearchCabs from "./components/core/SearchCabs";
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducer/index';
 import { Provider, useDispatch, useSelector } from 'react-redux';
@@ -35,7 +35,9 @@ import Drawer_Nav from "./components/core/Drawer_Nav";
 import { createStackNavigator } from '@react-navigation/stack'
 import NavigationDrawer from "./components/NavigationDrawer/NavigationDrawer";
 
-import Tes2 from './components/core/Tes2'
+import CabScheduleList from './components/core/CabScheduleList'
+import SelectSeats from "./components/core/SelectSeats";
+import Bottombar from "./components/common/Bottombar";
 const Drawer = createDrawerNavigator();
 
  function AppNavigator() {
@@ -259,10 +261,17 @@ const Drawer = createDrawerNavigator();
 
  
     <Stack.Screen 
-          name="Available" 
-          component={Tes2} 
+          name="CabScheduleList" 
+          component={CabScheduleList} 
           options={{ headerShown: false }} 
         />
+
+<Stack.Screen 
+          name="SelectSeats" 
+          component={SelectSeats} 
+          options={{ headerShown: false }} 
+        />
+        
     
 
       </Stack.Navigator>

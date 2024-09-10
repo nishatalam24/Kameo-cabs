@@ -2,6 +2,7 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import SeatIcone from "../../icons/SeatIcone";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from '@react-navigation/native';
 
 const carsData = [
   {
@@ -50,11 +51,14 @@ const carsData = [
 ];
 
 const AvailableCabList = () => {
+
+  const navigation = useNavigation();
+
   return (
     <ScrollView className="w-screen h-[75vh]  bg-[#F3F2F9]">
       {carsData.map((car, index) => (
         <View key={index} className="w-full flex flex-row justify-center py-[20px] ">
-          <TouchableOpacity>
+          <TouchableOpacity    onPress={() => navigation.navigate('SelectSeats')}>
             <View className="w-[90vw] rounded-[10px] py-[2px] px-[15px] gap-y-[10px] bg-white border border-[#E5E5E5]">
               {/* carName */}
               <Text className="font-[600] text-[15px]">{car.carName}</Text>

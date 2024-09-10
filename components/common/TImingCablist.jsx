@@ -70,6 +70,7 @@ const TImingCablist = () => {
 </View>
 
   </View>
+  
 
 <View className=" ">
 
