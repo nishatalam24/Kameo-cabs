@@ -57,7 +57,7 @@ const SelectSeats = ({ navigation }) => {
   };
 
   return (
-    <View>
+   <View className=" ">
       <View
         style={{
           flexDirection: "row",
@@ -66,7 +66,7 @@ const SelectSeats = ({ navigation }) => {
           padding: 10,
           backgroundColor: "white",
         }}
-        className="flex border-b border-[#C0C0C0] h-[60px]"
+        className="flex border-b border-[#C0C0C0] h-[60px] bg-white"
       >
         <View className="flex flex-row gap-x-[20px] ">
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -114,9 +114,9 @@ const SelectSeats = ({ navigation }) => {
         ))}
       </View>
 
-      <ScrollView className="h-[88vh]  bg-white flex flex-col ">
+      <ScrollView className="h-[90%]  bg-white flex flex-col  ">
 
-        <View className="gap-y-[30px]">
+        <View className="gap-y-[30px] pb-[10%]">
 
         <View className=" w-screen flex flex-row justify-center">
           <Image source={Car6Seater} className="h-[470px] w-[229px] " />
@@ -148,8 +148,8 @@ const SelectSeats = ({ navigation }) => {
             onPress={openDrawer} 
           />
         </View>
-        </View>
-   
+
+
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       {/* <TouchableOpacity onPress={openDrawer} style={{ marginBottom: 20 }}>
         <Text style={{ textAlign: 'center', fontSize: 18 }}>Open Drawer</Text>
@@ -216,6 +216,10 @@ const SelectSeats = ({ navigation }) => {
         </Animated.View>
       )}
     </View>
+
+        </View>
+   
+   
       </ScrollView>
 
 
